@@ -9,25 +9,20 @@ const app = express()
 firebase.initializeApp(firebaseConfig)
 
 let database = firebase.database()
-cron.schedule('*/10 * * * * *', () => {
+cron.schedule('* */3 * * *', () => {
   database.ref('without')
     .once('value', (snapshot) => {
       const snapshotData = {}
       snapshot.forEach((child) => {
         snapshotData[child.key] = child.val()
       })
-      if(true) {
-        database.ref('without').update({count: snapshotData.count + 1}).then((resp) => console.log(resp))
-      }
+      const startTime = moment(snapshotData.start)
+      const today = moment().format('YYYY-MM-DD HH:mm:ss')
+      const difference = startTime.diff(today, 'days')
+      database.ref('without').update({count: Math.abs(difference)}).then((resp) => console.log(resp))
     })
 })
 
 const port = process.env.PORT || 8080
 
 app.listen(port)
-/*
-const childKey = child.key
-const childData = child.val()
-if(childKey === 'start') {
-  database.ref('without').update({count: 1}).then((resp) => console.log(resp))
-}*/
