@@ -1,0 +1,22 @@
+{
+  "name": "sugar-counter",
+  "version": "1.0.0",
+  "description": "node app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "15.6.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase": "^8.2.5",
+    "moment": "^2.29.1",
+    "node-cron": "^2.0.3"
+  }
+}
